@@ -73,7 +73,7 @@ Required before merging to `main`:
 - At least one approving review (self-review counts during solo development, but
   prefer a second pair of eyes once the team grows).
 - PR template checklists ticked or N/A-justified.
-- Lint and typecheck pass locally (`pnpm run lint && pnpm run typecheck`). CI is
+- Lint and typecheck pass locally (`bun run lint && bun run typecheck`). CI is
   intentionally not configured — verifying locally before merge is the contract.
 
 ---
@@ -197,7 +197,7 @@ and the project is small enough that local checks plus the PR template are
 enough.
 
 What this means in practice:
-- **Run `pnpm run lint && pnpm run typecheck` locally** before requesting review.
+- **Run `bun run lint && bun run typecheck` locally** before requesting review.
 - **The `status: triage` label is applied by the issue templates themselves**
   (declared in the template `labels:` field), not by a workflow.
 - **Assignment is manual** — set the assignee when filing.

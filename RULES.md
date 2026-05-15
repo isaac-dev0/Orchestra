@@ -181,7 +181,7 @@ and should not be reintroduced:
 - **`BaseAgent` inheritance pattern** — we use Google ADK's `LlmAgent` directly. There is no custom base class.
 - **Arize spans** — observability is Dynatrace via OTel. The span pattern is the same; the exporter is different.
 - **`backend/partners/` adapter directory** — here it is `integrations/`.
-- **OpenAPI codegen (`pnpm codegen`)** — we do not have a shared OpenAPI spec yet. Types in `types/api.ts` are maintained manually until the API stabilises.
+- **OpenAPI codegen (`bun run codegen`)** — we do not have a shared OpenAPI spec yet. Types in `types/api.ts` are maintained manually until the API stabilises.
 - **`shared/openapi.yaml` PR coordination rule** — not applicable.
 - **`FitReasoningAgent`, `GrantDocument`, etc.** — old project domain names. Ignore all examples from the previous project.
 - **`pytest-asyncio` session-scoped event loop** — use the default function scope unless a specific test requires otherwise.
