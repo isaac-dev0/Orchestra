@@ -13,16 +13,21 @@ branching, issues, labels, milestones, reviews, and merging.
 2. **Pick the right template** when opening the issue — Bug, Feature, or Task.
    Templates pre-fill the `type:` and `status: triage` labels and prompt you for
    scope, priority, and a multi-tenancy / branding check.
-3. **Issues land in `status: triage` by default.** The triage step is: confirm
-   it's well-defined, add a milestone if it's hackathon-scope, set priority,
-   move it to `status: ready` (or `status: in-progress` if you're starting now).
-4. **Branch from `main`** using the naming below. Open a PR early — draft is fine
+3. **Assign yourself when filing.** GitHub Actions are intentionally not used in
+   this repo (CI minutes are scarce), so assignment is manual: tick the
+   "assignees → yourself" box on the issue or PR form. The assignee column must
+   never be empty for in-progress work.
+4. **Issues land in `status: triage` by default** (the template applies the
+   label). The triage step is: confirm it's well-defined, add a milestone if
+   it's hackathon-scope, set priority, move it to `status: ready` (or
+   `status: in progress` if you're starting now).
+5. **Branch from `main`** using the naming below. Open a PR early — draft is fine
    while work is in flight.
-5. **PR template enforces the multi-tenancy and branding checklists.** Both must
+6. **PR template enforces the multi-tenancy and branding checklists.** Both must
    be ticked or explicitly marked N/A before merge.
-6. **Squash-merge to `main`.** The squash commit message must be a conventional
+7. **Squash-merge to `main`.** The squash commit message must be a conventional
    commit (`type(scope): subject` or `type: subject`) — see `RULES.md`.
-7. **Linked issue closes automatically** via the `Closes #N` line in the PR body.
+8. **Linked issue closes automatically** via the `Closes #N` line in the PR body.
 
 ---
 
@@ -67,8 +72,9 @@ Required before merging to `main`:
 - PR opened (no direct pushes — `main` is protected).
 - At least one approving review (self-review counts during solo development, but
   prefer a second pair of eyes once the team grows).
-- CI green (`ci.yml`).
 - PR template checklists ticked or N/A-justified.
+- Lint and typecheck pass locally (`pnpm run lint && pnpm run typecheck`). CI is
+  intentionally not configured — verifying locally before merge is the contract.
 
 ---
 
@@ -96,7 +102,7 @@ status: triage  →  status: ready  →  status: in-progress  →  status: needs
 ```
 
 - **triage** — needs a human to decide it's well-defined, prioritise it, attach
-  a milestone. Auto-applied by the triage workflow when an issue opens.
+  a milestone. Applied automatically by the issue templates on creation.
 - **ready** — agreed, prioritised, can be picked up.
 - **in-progress** — someone is actively working on it. Branch and (ideally) draft
   PR exist.
@@ -108,12 +114,10 @@ Only one `status:` label per issue at a time.
 
 ### Assignment
 
-Issues auto-assign to their creator via the triage workflow. Reassign manually
-if someone else is going to do the work. The assignee is the single owner —
-never leave an in-progress issue unassigned.
-
-PRs auto-assign to their author too, so "who owns this" is always answerable
-from the assignee column.
+Assignment is manual — there are no auto-assign workflows. When you file an
+issue or open a PR, set the assignee yourself. The assignee is the single owner;
+never leave an in-progress issue or PR unassigned. If you're not going to do the
+work, don't assign yourself — leave it ready for someone else to claim.
 
 ---
 
@@ -188,8 +192,15 @@ get the `post-hackathon` label instead.
 
 ## Automation
 
-- **`.github/workflows/ci.yml`** — lint and typecheck on push.
-- **`.github/workflows/triage.yml`** — assigns new issues to their creator,
-  applies `status: triage`, assigns new PRs to their author.
-- **Renovate** (`renovate.json`) — keeps dependencies fresh, applies the
-  `dependencies` label.
+GitHub Actions are intentionally **not** used in this repo. CI minutes are scarce
+and the project is small enough that local checks plus the PR template are
+enough.
+
+What this means in practice:
+- **Run `pnpm run lint && pnpm run typecheck` locally** before requesting review.
+- **The `status: triage` label is applied by the issue templates themselves**
+  (declared in the template `labels:` field), not by a workflow.
+- **Assignment is manual** — set the assignee when filing.
+- **Renovate** (`renovate.json`) runs as a hosted app, not a workflow — it keeps
+  dependencies fresh and applies the `dependencies` label without consuming
+  Actions minutes.
