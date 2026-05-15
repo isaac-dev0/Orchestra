@@ -1,0 +1,87 @@
+name: Bug report
+description: Something isn't working — Rosa, the dashboard, or the build.
+title: "fix: "
+labels:
+  - "type: fix"
+  - "status: triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing — check `CLAUDE.md` and `RULES.md` to confirm the behaviour you expected isn't actually documented as out-of-scope (e.g. SMS, Stripe, multi-vertical support).
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What's broken
+      description: One or two sentences. What did you expect to happen, and what actually happened?
+      placeholder: "Rosa replied with the wrong slot when two customers booked within 30 seconds of each other."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimum steps to make it happen again. Include `business_id`, channel (whatsapp/phone), and timestamps if relevant.
+      placeholder: |
+        1. Send WhatsApp to Dave's number from +447700000001 at 14:02
+        2. Send WhatsApp to same number from +447700000002 at 14:02
+        3. Observe both customers get offered the same 15:00 slot
+      render: markdown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      description: Which part of the system. Matches commit scope in RULES.md.
+      options:
+        - api
+        - web
+        - agent
+        - elastic
+        - twilio
+        - firebase
+        - dynatrace
+        - calendar
+        - whatsapp
+        - elevenlabs
+        - infra
+        - other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: |
+        P0 — production-breaking, drop everything.
+        P1 — blocks the next milestone.
+        P2 — fix this milestone.
+        P3 — backlog.
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / traces / screenshots
+      description: Paste relevant Dynatrace trace IDs, Firestore document paths, or console output. No secrets.
+      render: shell
+
+  - type: checkboxes
+    id: tenancy
+    attributes:
+      label: Multi-tenancy check
+      description: Per CLAUDE.md, every data bug is a potential tenancy bug.
+      options:
+        - label: This bug does not let one business read or write another business's data.
+        - label: I have confirmed the affected code path extracts `business_id` from the Firebase token or phone number lookup (not from a request body).

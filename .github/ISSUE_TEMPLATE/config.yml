@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/isaac-dev0/Orchestra/discussions
+    about: Open a Discussion for questions, ideas, or things that aren't yet a defined piece of work.

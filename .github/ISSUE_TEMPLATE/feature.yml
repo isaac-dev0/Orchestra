@@ -1,0 +1,74 @@
+name: Feature
+description: Propose a new capability for Rosa, the dashboard, or the platform.
+title: "feat: "
+labels:
+  - "type: feat"
+  - "status: triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing — check the "What we are NOT using" section in `CLAUDE.md` and the "What NOT to build right now" list. If your feature is on either list, file it as `post-hackathon` and explain why it should still be tracked now.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this solves
+      description: What can't Dave (or his customer) do today that this feature would unlock? Write it as a user-visible outcome, not a technical change.
+      placeholder: "Dave wants Rosa to text his customers a reminder the evening before their appointment so fewer no-shows."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would this work? Include the user flow, the channels involved (whatsapp/phone/dashboard), and any tool calls Rosa would make.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope_out
+    attributes:
+      label: Explicitly out of scope
+      description: What does this feature deliberately not do? Useful to prevent scope creep in review.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - api
+        - web
+        - agent
+        - elastic
+        - twilio
+        - firebase
+        - dynatrace
+        - calendar
+        - whatsapp
+        - elevenlabs
+        - infra
+        - cross-cutting
+    validations:
+      required: true
+
+  - type: dropdown
+    id: hackathon
+    attributes:
+      label: Hackathon scope
+      description: Is this required for the June 11 2026 submission, or post-hackathon?
+      options:
+        - "Required for hackathon"
+        - "Nice-to-have for hackathon"
+        - "Post-hackathon"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: branding
+    attributes:
+      label: Branding alignment
+      description: For anything user-facing.
+      options:
+        - label: I have read `BRANDING.md` and the proposed copy / behaviour matches Rosa's voice and the platform's positioning (or this change has no user-facing surface).

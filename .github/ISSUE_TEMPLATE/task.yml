@@ -1,0 +1,67 @@
+name: Task / chore
+description: Internal work — refactor, docs, tests, tooling, infra. Anything that isn't a user-visible feature or a bug.
+title: "chore: "
+labels:
+  - "type: chore"
+  - "status: triage"
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: Pick the conventional commit type this work will produce.
+      options:
+        - "refactor — internal change, no behaviour change"
+        - "docs — documentation only"
+        - "test — test changes"
+        - "chore — maintenance, dependencies, cleanup"
+        - "infra — CI, deploy, tooling"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What needs doing
+      description: Be specific. "Refactor the agent code" is not a task. "Extract the prompt-building logic out of rosa.py into prompts.py" is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why now
+      description: What does this unblock? What pain does it remove? Tasks without a "why" rot in the backlog.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - api
+        - web
+        - agent
+        - elastic
+        - twilio
+        - firebase
+        - dynatrace
+        - calendar
+        - whatsapp
+        - elevenlabs
+        - infra
+        - cross-cutting
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      description: Bullet list of conditions that must be true before this is closed.
+      placeholder: |
+        - prompts.py contains the prompt template constants
+        - rosa.py imports them and no longer holds prompt strings
+        - tests still pass
+        - CLAUDE.md updated if structure changed
