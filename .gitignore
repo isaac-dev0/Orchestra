@@ -1,0 +1,38 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Turbo
+.turbo
+
+# Claude Code local overrides
+.claude/settings.local.json
